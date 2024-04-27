@@ -1,0 +1,24 @@
+{
+  "name": "stimulus-attributes",
+  "version": "1.0.0",
+  "description": "Stimulus Helper Functions",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pankaj3399/stimulus-js.git"
+  },
+  "author": "Pankaj Vatwani",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pankaj3399/stimulus-js/issues"
+  },
+  "homepage": "https://github.com/pankaj3399/stimulus-js#readme",
+  "dependencies": {
+    "escape-html": "^1.0.3",
+    "jest": "^29.7.0"
+  }
+}
