@@ -181,7 +181,11 @@ class StimulusAttributes {
   }
 
   normalizeControllerName(name) {
-    return name.replace(/[^a-zA-Z0-9_-]/g, "-").replace(/-{2,}/g, "-");
+    let controllerName = name
+      .replace(/[^a-zA-Z0-9_-]/g, "-")
+      .replace(/-{2,}/g, "-");
+    controllerName = controllerName.replace(/_/g, "-");
+    return controllerName;
   }
 
   escapeAsHtmlAttr(value) {
