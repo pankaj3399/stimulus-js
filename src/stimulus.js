@@ -14,7 +14,7 @@ class StimulusAttributes {
     controllerName,
     controllerValues = {},
     controllerClasses = {},
-    controllerOutlets = {}
+    controllerOutlets = {},
   ) {
     controllerName = this.normalizeControllerName(controllerName);
     this.controllers.push(controllerName);
@@ -66,7 +66,7 @@ class StimulusAttributes {
 
   toString() {
     const controllers = this.controllers.map((controllerName) =>
-      this.escapeAsHtmlAttr(controllerName)
+      this.escapeAsHtmlAttr(controllerName),
     );
 
     const actions = this.actions.map((actionData) => {
@@ -110,7 +110,7 @@ class StimulusAttributes {
     const attributeStrings = Object.entries(this.attributes).map(
       ([key, value]) => {
         return `${key}="${this.escapeAsHtmlAttr(value)}"`;
-      }
+      },
     );
 
     return attributes.concat(attributeStrings).join(" ");
@@ -181,11 +181,11 @@ class StimulusAttributes {
   }
 
   normalizeControllerName(name) {
-    let controllerName = name
-      .replace(/[^a-zA-Z0-9_-]/g, "-")
-      .replace(/-{2,}/g, "-");
-    controllerName = controllerName.replace(/_/g, "-");
-    return controllerName;
+    if (name.startsWith("@")) {
+      name = name.slice(1); // remove the @
+    }
+
+    return name.replace(/\//g, "--").replace(/_/g, "-");
   }
 
   escapeAsHtmlAttr(value) {
@@ -203,14 +203,14 @@ export function stimulus_controller(
   controllerName,
   controllerValues = {},
   controllerClasses = {},
-  controllerOutlets = {}
+  controllerOutlets = {},
 ) {
   const attributes = new StimulusAttributes(null);
   attributes.addController(
     controllerName,
     controllerValues,
     controllerClasses,
-    controllerOutlets
+    controllerOutlets,
   );
   return attributes.toString();
 }
@@ -219,7 +219,7 @@ export function stimulus_action(
   controllerName,
   actionName,
   eventName = null,
-  parameters = {}
+  parameters = {},
 ) {
   const attributes = new StimulusAttributes(null);
   attributes.addAction(controllerName, actionName, eventName, parameters);
