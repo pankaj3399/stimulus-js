@@ -175,9 +175,12 @@ class StimulusAttributes {
 
     return value;
   }
-
   normalizeKeyName(name) {
-    return name.replace(/[A-Z]/g, (match) => "-" + match.toLowerCase());
+    return name
+      .replace(/[^a-zA-Z0-9]/g, "-") // replace quotes and special chars with hyphen
+      .replace(/[A-Z]/g, (match) => "-" + match.toLowerCase()) // camelCase to kebab-case
+      .replace(/-{2,}/g, "-") // collapse multiple hyphens
+      .replace(/^-|-$/g, ""); // trim leading/trailing hyphen
   }
 
   normalizeControllerName(name) {
